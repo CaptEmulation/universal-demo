@@ -9,4 +9,10 @@ const render = AppRoot => ReactDOM.render(
   document.getElementById('root')
 )
 
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./components/App', () => {
+    render(require('./components/App').default) // eslint-ignore-line
+  })
+}
+
 render(App)
