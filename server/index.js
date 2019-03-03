@@ -27,7 +27,11 @@ const done = () => !isBuilt
 if (DEV) {
   const compiler = webpack([clientConfig, serverConfig])
   const clientCompiler = compiler.compilers[0]
-  const options = { publicPath, stats: { colors: true } }
+  const options = {
+    publicPath,
+    serverSideRender: true,
+    stats: { colors: true }
+  }
   const devMiddleware = webpackDevMiddleware(compiler, options)
 
   app.use(devMiddleware)

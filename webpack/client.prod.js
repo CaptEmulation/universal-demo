@@ -44,7 +44,9 @@ module.exports = {
     extensions: ['.js', '.css', '.styl']
   },
   plugins: [
-    new ExtractCssChunks(),
+    new ExtractCssChunks({
+      filename: '[name].[chunkhash].css'
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({

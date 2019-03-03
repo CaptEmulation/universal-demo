@@ -4,7 +4,7 @@ import createHistory from 'history/createBrowserHistory'
 import App from './App'
 
 const history = createHistory()
-const render = AppRoot => ReactDOM.hydrate(
+const render = AppRoot => ReactDOM.render(
   <AppRoot history={history} />,
   document.getElementById('root')
 )
