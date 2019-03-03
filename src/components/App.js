@@ -5,38 +5,6 @@ import { pages, nextIndex, indexFromPath } from '../utils'
 import UniversalComponent from '../UniversalComponent'
 
 export default class App extends React.Component {
-  render() {
-    const { index, done, loading } = this.state
-    const page = pages[index]
-    const loadingClass = loading ? styles.loading : ''
-    const buttonClass = `${styles[page]} ${loadingClass}`
-
-    return (
-      <div className={styles.container}>
-        <h1>Hello Reactlandia</h1>
-        {done && <div className={styles.checkmark}>all loaded</div>}
-
-        <UsageHero page={page} />
-
-        <UniversalComponent
-          page={`components/${page}`}
-          onBefore={this.beforeChange}
-          onAfter={this.afterChange}
-          onError={this.handleError}
-        />
-
-        <button type='button' className={buttonClass} onClick={this.changePage}>
-          {this.buttonText()}
-        </button>
-
-        <p>
-          <span>*why are you looking at this? refresh the page</span>
-          <span>and view the source in Chrome for the real goods</span>
-        </p>
-      </div>
-    )
-  }
-
   constructor(props) {
     super(props)
 
@@ -99,5 +67,37 @@ export default class App extends React.Component {
     const { loading, error } = this.state
     if (error) return 'ERROR'
     return loading ? 'LOADING...' : 'CHANGE PAGE'
+  }
+
+  render() {
+    const { index, done, loading } = this.state
+    const page = pages[index]
+    const loadingClass = loading ? styles.loading : ''
+    const buttonClass = `${styles[page]} ${loadingClass}`
+
+    return (
+      <div className={styles.container}>
+        <h1>Hello Reactlandia</h1>
+        {done && <div className={styles.checkmark}>all loaded</div>}
+
+        <UsageHero page={page} />
+
+        <UniversalComponent
+          page={page}
+          onBefore={this.beforeChange}
+          onAfter={this.afterChange}
+          onError={this.handleError}
+        />
+
+        <button type='button' className={buttonClass} onClick={this.changePage}>
+          {this.buttonText()}
+        </button>
+
+        <p>
+          <span>*why are you looking at this? refresh the page</span>
+          <span>and view the source in Chrome for the real goods</span>
+        </p>
+      </div>
+    )
   }
 }
